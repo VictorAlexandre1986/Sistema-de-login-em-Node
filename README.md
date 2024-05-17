@@ -9,7 +9,7 @@
   <li>Node.js</li>
   <li>Express.js</li>
   <li>Prisma</li>
-  <li></li>
+  <li>Crypto</li>
 </ul>
 
 ## Para utilizar o sistema é necessário seguir alguns passos :
