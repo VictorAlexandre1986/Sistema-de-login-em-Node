@@ -1,11 +1,35 @@
 // /src/useCases/loginUseCase.js
 const LoginRepository = require('../repositories/login_repo');
 const Login = require('../entities/login_entity');
+const  createHash   = require('../utils/utils')
+
 
 class LoginUseCase {
   async criar(loginData) {
-    const novoLogin = await LoginRepository.criar(loginData);
+    let username = loginData.username
+    let senha = loginData.password
+    const senha_criptgrafada = createHash(senha)
+    const data={
+      username:username,
+      password:senha_criptgrafada
+    }
+    const novoLogin = await LoginRepository.criar(data);
     return new Login(novoLogin);
+  }
+
+  async logar(loginData){
+    let username = loginData.username
+    let senha = loginData.password
+    const senha_criptgrafada = createHash(senha)
+    const data = {
+      username:username,
+      password: senha_criptgrafada
+    }
+    const logando = await LoginRepository.logar(data);
+    if(!logando){
+      throw new Error('Login não encontrado')
+    }
+    return new Login(logando)
   }
 
   async listar() {

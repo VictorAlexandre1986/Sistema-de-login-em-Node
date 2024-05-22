@@ -29,8 +29,8 @@ const swaggerOptions = {
   const swaggerSpec = swaggerJsdoc(swaggerOptions);
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use('/login', loginRoutes);
-app.use('/cliente', clienteRoutes);
+app.use('/logins', loginRoutes);
+app.use('/clientes', clienteRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

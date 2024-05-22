@@ -15,6 +15,14 @@ class LoginRepository {
     return await Prisma.login.findUnique({ where: { id } });
   }
 
+  async logar(loginData){
+    return await Prisma.login.findFirst({ where: {
+      AND: [
+        { username: loginData.username },
+        { password: loginData.password }
+      ] }})
+  }
+
   async atualizar(id, loginData) {
     return await Prisma.login.update({ where: { id }, data: loginData });
   }

@@ -4,11 +4,22 @@ const LoginUseCase = require('../usecase/login_usecase');
 exports.criar = async (req, res) => {
   try {
     const novoLogin = await LoginUseCase.criar(req.body);
+    console.log(req.body)
     res.status(201).json(novoLogin);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.logar = async (req, res) => {
+  try {
+    const Logando = await LoginUseCase.logar(req.body);
+    res.status(201).json(Logando);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 exports.listar = async (req, res) => {
   try {

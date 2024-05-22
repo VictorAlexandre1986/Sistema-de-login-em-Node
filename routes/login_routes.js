@@ -1,18 +1,18 @@
 // /src/routes/login.js
+const express = require('express');
+const router = express.Router();
+const loginController = require('../controller/login_controller');
 /**
  * @openapi
  * components:
  *   schemas:
- *     Cliente:
+ *     Logins:
  *       type: object
  *       required:
  *         - username
  *         - password
  * 
  *       properties:
- *         id:
- *           type: integer
- *           description: ID único do login
  *         username:
  *           type: string
  *           description: Usuario do login
@@ -22,9 +22,7 @@
  *         
  */
 
-const express = require('express');
-const router = express.Router();
-const loginController = require('../controller/login_controller');
+
 
 /**
  * @openapi
@@ -41,7 +39,7 @@ const loginController = require('../controller/login_controller');
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/Login"
+ *             $ref: "#/components/schemas/Logins"
  *     responses:
  *       '201':
  *         description: Login criado com sucesso
@@ -52,9 +50,24 @@ const loginController = require('../controller/login_controller');
 router.post('/', loginController.criar);
 router.get('/', loginController.listar);
 router.get('/:id', loginController.buscarPorId);
+router.post('/logar', loginController.logar);
 
 /**
- * @openapi
+ * @openapi 
+ *  /logins/logar:
+ *   post:
+ *     summary: Cria um novo login
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/Logins"
+ *     responses:
+ *       '200':
+ *         description: login encontrado
+ *       '404':
+ *         description: login não encontrado
  * /logins/{id}:
  *   get:
  *     summary: Busca um login pelo ID
@@ -84,7 +97,7 @@ router.get('/:id', loginController.buscarPorId);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/Login"
+ *             $ref: "#/components/schemas/Logins"
  *     responses:
  *       '200':
  *         description: Login atualizado com sucesso
