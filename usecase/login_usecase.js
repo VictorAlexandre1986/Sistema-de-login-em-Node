@@ -2,6 +2,7 @@
 const LoginRepository = require('../repositories/login_repo');
 const Login = require('../entities/login_entity');
 const  createHash   = require('../utils/utils')
+const jwt = require('jsonwebtoken');
 
 
 class LoginUseCase {
@@ -29,6 +30,7 @@ class LoginUseCase {
     if(!logando){
       throw new Error('Login não encontrado')
     }
+    const token = jwt.sign({ username: data.username }, process.env.JWT_SECRET, { expiresIn: '2h' });
     return new Login(logando)
   }
 

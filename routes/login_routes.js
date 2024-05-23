@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const loginController = require('../controller/login_controller');
+const { authenticateToken } = require('../middleware/auth');
 /**
  * @openapi
  * components:
@@ -119,7 +120,7 @@ router.post('/logar', loginController.logar);
  *         description: Login não encontrado
  */
 
-router.put('/:id', loginController.atualizar);
-router.delete('/:id', loginController.deletar);
+router.put('/:id', authenticateToken, loginController.atualizar);
+router.delete('/:id', authenticateToken, loginController.deletar);
 
 module.exports = router;
