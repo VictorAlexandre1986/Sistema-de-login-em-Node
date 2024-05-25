@@ -30,7 +30,8 @@ class LoginUseCase {
     if(!logando){
       throw new Error('Login não encontrado')
     }
-    const token = jwt.sign({ username: data.username }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ username: data.username }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    // console.log(res.json({token}))
     return new Login(logando)
   }
 
