@@ -16,6 +16,20 @@ const swaggerOptions = {
         description: 'Documentação da API para gerenciar imóveis, clientes, contratos e pagamentos',
         version: '1.0.0',
       },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
+      },
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       servers: [
         {
           url: 'http://localhost:3000',
