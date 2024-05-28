@@ -1,3 +1,5 @@
+const { authenticateToken } = require('../middleware/auth');
+
 // /src/routes/clienteRoutes.js
 /**
  * @openapi
@@ -55,9 +57,9 @@ const clienteController = require('../controller/cliente_controller');
  *         description: Erro na requisição
  */
 
-router.post('/', clienteController.criar);
-router.get('/', clienteController.listar);
-router.get('/:id', clienteController.buscarPorId);
+router.post('/', authenticateToken, clienteController.criar);
+router.get('/', authenticateToken, clienteController.listar);
+router.get('/:id', authenticateToken, clienteController.buscarPorId);
 
 /**
  * @openapi
@@ -112,7 +114,7 @@ router.get('/:id', clienteController.buscarPorId);
  *         description: Cliente não encontrado
  */
 
-router.put('/:id', clienteController.atualizar);
-router.delete('/:id', clienteController.deletar);
+router.put('/:id', authenticateToken, clienteController.atualizar);
+router.delete('/:id', authenticateToken, clienteController.deletar);
 
 module.exports = router;
